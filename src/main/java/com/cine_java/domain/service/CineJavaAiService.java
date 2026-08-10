@@ -1,4 +1,4 @@
-package com.cine_java;
+package com.cine_java.domain.service;
 
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;

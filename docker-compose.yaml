@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cine_java_db
+      POSTGRES_USER: facundo
+      POSTGRES_PASSWORD: facundo.java
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local
