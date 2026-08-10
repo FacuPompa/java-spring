@@ -1,13 +1,14 @@
 package com.cine_java;
 
 import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.V;
 import dev.langchain4j.service.spring.AiService;
 
 @AiService
 public interface CineJavaAiService {
 
     @UserMessage("""
-            Genera un saludo de bienvenida al usuario de gestión de películas. Usá menos de 120 caracteres y hacelo de manera amigable. No uses emojis.
+            Genera un saludo de bienvenida a la plataforma de gestion de peliculas {{platform}}. Usá menos de 120 caracteres y NO USES EMOJIS.
             """)
-    String generateGreeting();
+    String generateGreeting(@V("platform") String platform);
 }
