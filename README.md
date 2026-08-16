@@ -1,10 +1,7 @@
 # Cine Java API
 
-<<<<<<< HEAD
-API REST de películas creada con **Java y Spring Boot** como proyecto de práctica del curso de Spring.
-=======
-API REST de películas creada con **Java y Spring Boot** como práctica de Spring.
->>>>>>> 08ea4d2ee99402e90b5a04434a9962ba56dba1b6
+API REST de películas creada con **Java y Spring Boot**.
+
 
 El objetivo es aprender, paso a paso, cómo construir un backend: recibir peticiones HTTP, aplicar una estructura por capas y guardar datos en PostgreSQL.
 
@@ -91,19 +88,3 @@ Luego se puede probar el endpoint en el navegador, Postman o Insomnia:
 ```text
 http://localhost:8090/cine-java/api/movies
 ```
-
-## Próximos pasos
-
-- [ ] Consultar una película por id.
-- [ ] Crear películas con `POST`.
-- [ ] Actualizar películas con `PUT` o `PATCH`.
-- [ ] Eliminar películas con `DELETE`.
-- [ ] Agregar validaciones y manejo de errores.
-- [ ] Desplegar la API en Render.
-<<<<<<< HEAD
-
-## Nota de aprendizaje
-
-Este repositorio registra mi avance con Spring Boot. La idea no es solo que los endpoints funcionen, sino entender gradualmente para qué sirve cada capa y cada herramienta.
-=======
->>>>>>> 08ea4d2ee99402e90b5a04434a9962ba56dba1b6
