@@ -3,6 +3,7 @@ package com.cine_java.persistance;
 import com.cine_java.domain.dto.MovieDto;
 import com.cine_java.domain.dto.UpdateMovieDto;
 import com.cine_java.domain.exception.MovieAlreadyExistsException;
+import com.cine_java.domain.exception.MovieNotFoundException;
 import com.cine_java.domain.repository.MovieRepository;
 import com.cine_java.persistance.crud.CrudMovieEntity;
 import com.cine_java.persistance.entity.MovieEntity;
@@ -29,7 +30,7 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public MovieDto getById(long id) {
-        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
+        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElseThrow(MovieNotFoundException::new);
         return this.movieMapper.toDto(movieEntity);
     }
 
@@ -47,9 +48,15 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
-        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
+        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElseThrow(MovieNotFoundException::new);
 
-        if (movieEntity == null) return null;
+        if(!movieEntity.getTitulo().equals(updateMovieDto.title())) {
+            MovieEntity existingMovie = this.crudMovieEntity.findFirstByTitulo(updateMovieDto.title());
+        }
+
+        if(movieEntity != null) {
+            throw new MovieAlreadyExistsException(updateMovieDto.title());
+        }
 
         this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
         return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
@@ -57,6 +64,8 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public void delete(long id) {
+
+        var movieEntity = crudMovieEntity.findById(id).orElseThrow(MovieNotFoundException::new);
         this.crudMovieEntity.deleteById(id);
     }
 
