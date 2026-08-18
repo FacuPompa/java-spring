@@ -3,6 +3,7 @@ package com.cine_java.domain.service;
 import com.cine_java.domain.dto.MovieDto;
 import com.cine_java.domain.dto.UpdateMovieDto;
 import com.cine_java.domain.repository.MovieRepository;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    @Tool("Busca todas las peliculas que existan dentro de la plataforma")
     public List<MovieDto> getAll() {
         return this.movieRepository.getAll();
     }

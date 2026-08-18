@@ -1,8 +1,11 @@
 package com.cine_java.web.controller;
 
 import com.cine_java.domain.dto.MovieDto;
+import com.cine_java.domain.dto.SuggestRequestDto;
 import com.cine_java.domain.dto.UpdateMovieDto;
+import com.cine_java.domain.service.CineJavaAiService;
 import com.cine_java.domain.service.MovieService;
+import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +17,11 @@ import java.util.List;
 
 public class MovieController {
     private final MovieService movieService;
+    private final CineJavaAiService aiService;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, CineJavaAiService aiService) {
         this.movieService = movieService;
+        this.aiService = aiService;
     }
 
     @GetMapping()
@@ -34,12 +39,19 @@ public class MovieController {
         return ResponseEntity.ok(movieDto);
     }
 
+    @PostMapping("/suggest")
+    public ResponseEntity<String> generateMovieSuggestion(@RequestBody SuggestRequestDto suggestRequestDto) {
+        return ResponseEntity.ok(this.aiService.generateMoviesSuggestion(suggestRequestDto.userPreferences()));
+    }
+
 
     @PostMapping()
     public ResponseEntity<MovieDto> add(@RequestBody MovieDto movieDto) {
         MovieDto movieDtoResponse = this.movieService.add(movieDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(movieDtoResponse);
     }
+
+
 
 
     @PutMapping("/{id}")
