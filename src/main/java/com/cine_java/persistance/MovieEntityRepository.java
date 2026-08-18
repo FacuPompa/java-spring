@@ -1,12 +1,14 @@
 package com.cine_java.persistance;
 
 import com.cine_java.domain.dto.MovieDto;
+import com.cine_java.domain.dto.UpdateMovieDto;
 import com.cine_java.domain.repository.MovieRepository;
 import com.cine_java.persistance.crud.CrudMovieEntity;
 import com.cine_java.persistance.entity.MovieEntity;
 import com.cine_java.persistance.mapper.MovieMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -35,6 +37,16 @@ public class MovieEntityRepository implements MovieRepository {
         MovieEntity movieEntity = this.movieMapper.toEntity(movieDto);
         movieEntity.setEstado("D");
 
+        return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
+    }
+
+    @Override
+    public MovieDto update(long id, UpdateMovieDto updateMovieDto) {
+        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
+
+        if (movieEntity == null) return null;
+
+        this.movieMapper.updateEntityFromDto(updateMovieDto, movieEntity);
         return this.movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
     }
 
