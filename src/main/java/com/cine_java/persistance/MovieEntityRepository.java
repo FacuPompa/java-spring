@@ -2,6 +2,7 @@ package com.cine_java.persistance;
 
 import com.cine_java.domain.dto.MovieDto;
 import com.cine_java.domain.dto.UpdateMovieDto;
+import com.cine_java.domain.exception.MovieAlreadyExistsException;
 import com.cine_java.domain.repository.MovieRepository;
 import com.cine_java.persistance.crud.CrudMovieEntity;
 import com.cine_java.persistance.entity.MovieEntity;
@@ -34,6 +35,10 @@ public class MovieEntityRepository implements MovieRepository {
 
     @Override
     public MovieDto save(MovieDto movieDto) {
+        if (this.crudMovieEntity.findFirstByTitulo(movieDto.title()) != null) {
+            throw new MovieAlreadyExistsException(movieDto.title());
+        };
+
         MovieEntity movieEntity = this.movieMapper.toEntity(movieDto);
         movieEntity.setEstado("D");
 
