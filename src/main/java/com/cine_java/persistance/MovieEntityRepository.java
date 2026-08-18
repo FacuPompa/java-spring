@@ -51,14 +51,8 @@ public class MovieEntityRepository implements MovieRepository {
     }
 
     @Override
-    public MovieDto delete(long id) {
-        MovieEntity movieEntity = this.crudMovieEntity.findById(id).orElse(null);
-
-        if (movieEntity == null) return null;
-
-        this.crudMovieEntity.delete(movieEntity);
-
-        return this.movieMapper.toDto(movieEntity);
+    public void delete(long id) {
+        this.crudMovieEntity.deleteById(id);
     }
 
 }
