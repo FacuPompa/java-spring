@@ -5,6 +5,7 @@ import com.cine_java.domain.dto.SuggestRequestDto;
 import com.cine_java.domain.dto.UpdateMovieDto;
 import com.cine_java.domain.service.CineJavaAiService;
 import com.cine_java.domain.service.MovieService;
+import jakarta.validation.Valid;
 import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,10 +53,8 @@ public class MovieController {
     }
 
 
-
-
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody UpdateMovieDto updateMovieDto) {
+    public ResponseEntity<MovieDto> update(@PathVariable long id, @RequestBody @Valid UpdateMovieDto updateMovieDto) {
         return ResponseEntity.ok(this.movieService.update(id, updateMovieDto));
     }
 
