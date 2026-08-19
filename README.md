@@ -4,6 +4,8 @@ API REST para administrar un catálogo de películas, desarrollada con Java y Sp
 
 El proyecto aplica una arquitectura por capas, persiste los datos en PostgreSQL y documenta sus endpoints con OpenAPI/Swagger. Está desplegado en Render.
 
+> Demo en producción: [cinejava.onrender.com](https://cinejava.onrender.com/cine-java/api/movies)
+
 ## Tecnologías
 
 - Java 21
@@ -128,6 +130,10 @@ http://localhost:8090/cine-java/api/movies
 ## Despliegue
 
 La aplicación se empaqueta en un contenedor Docker y se ejecuta con el perfil `prod` en Render. La conexión a PostgreSQL se configura mediante estas variables de entorno:
+
+API pública: [https://cinejava.onrender.com/cine-java/api/movies](https://cinejava.onrender.com/cine-java/api/movies)
+
+Swagger UI: [https://cinejava.onrender.com/cine-java/api/swagger-ui/index.html](https://cinejava.onrender.com/cine-java/api/swagger-ui/index.html)
 
 ```text
 DATABASE_HOST
