@@ -16,31 +16,51 @@ El objetivo es aprender, paso a paso, cómo construir un backend: recibir petici
 - PostgreSQL
 - Docker Compose
 - MapStruct
+- LangChain4j
+- OpenAPI / Swagger UI
 - Gradle
 
 ## Qué hace actualmente
 
-- Expone un endpoint para listar películas.
+- Lista todas las películas.
+- Busca una película por su ID.
+- Crea películas nuevas.
+- Actualiza título, fecha de lanzamiento y calificación.
+- Elimina películas.
+- Valida datos de entrada.
+- Devuelve errores controlados para películas inexistentes, duplicadas o datos inválidos.
+- Genera saludos y recomendaciones mediante IA.
 - Guarda las películas en PostgreSQL.
 - Carga películas de prueba al iniciar la aplicación.
 - Separa el código en capas: web, dominio y persistencia.
-- Incluye un endpoint de saludo generado mediante LangChain4j como práctica adicional.
 
-## Endpoint disponible
+## Endpoints disponibles
 
 Con el perfil de desarrollo activo, la aplicación se ejecuta en el puerto `8090` y usa el prefijo `/cine-java/api`.
 
 | Método | Ruta | Descripción |
 | --- | --- | --- |
-| `GET` | `/cine-java/api/movies` | Devuelve todas las películas disponibles en la base de datos. |
+| `GET` | `/cine-java/api/movies` | Devuelve todas las películas. |
+| `GET` | `/cine-java/api/movies/{id}` | Devuelve una película por su ID. |
+| `POST` | `/cine-java/api/movies` | Crea una película. |
+| `PUT` | `/cine-java/api/movies/{id}` | Actualiza una película. |
+| `DELETE` | `/cine-java/api/movies/{id}` | Elimina una película. |
+| `POST` | `/cine-java/api/movies/suggest` | Genera recomendaciones mediante IA. |
+| `GET` | `/cine-java/api/hello` | Genera un saludo mediante IA. |
 
-Ejemplo de URL:
+## Documentación interactiva
+
+Con la aplicación iniciada, Swagger UI está disponible en:
 
 ```text
-http://localhost:8090/cine-java/api/movies
+http://localhost:8090/cine-java/api/swagger-ui/index.html
 ```
 
-La respuesta es una lista JSON con el título, duración, género, fecha de estreno y calificación de cada película.
+La especificación OpenAPI en formato JSON está disponible en:
+
+```text
+http://localhost:8090/cine-java/api/v3/api-docs
+```
 
 ## Estructura del proyecto
 
